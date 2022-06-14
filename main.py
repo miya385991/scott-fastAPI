@@ -1,12 +1,28 @@
 import datetime
 
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import models
 from database import engine, SessionLocal
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 
 app = FastAPI()
+
+# CORSオリジン設定
+origins = [
+    "http://localhost:8080"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 models.Base.metadata.create_all(bind=engine)
 
 
