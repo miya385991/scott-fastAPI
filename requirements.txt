@@ -1,4 +1,4 @@
-SQLAlchem==1.4.37
+SQLAlchemy==1.4.37
 anyio==3.6.1
 asgiref==3.5.2
 base==1.0.4
