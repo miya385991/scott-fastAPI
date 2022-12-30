@@ -23,12 +23,12 @@ class Emp(BaseModel):
     dept_id: int
 
 
-@router.get("/emps")
+@router.get("/")
 async def emps_all(db: Session = Depends(get_db)):
     return db.query(models.Emps).all()
 
 
-@router.post('/emps')
+@router.post('/')
 async def create_emp(emp: Emp, db: Session = Depends(get_db)):
     emp_model = models.Emps()
     emp_model.em_no = emp.em_no
@@ -45,7 +45,7 @@ async def create_emp(emp: Emp, db: Session = Depends(get_db)):
     return successful_response(201)
 
 
-@router.get("/emps/{emp_id}")
+@router.get("/{emp_id}")
 async def emps_row(emp_id: int, db: Session = Depends(get_db)):
     emp_model = db.query(models.Emps).filter(models.Emps.id == emp_id).first()
 
@@ -54,7 +54,7 @@ async def emps_row(emp_id: int, db: Session = Depends(get_db)):
     raise http_exception()
 
 
-@router.put("/emps/{emp_id}")
+@router.put("/{emp_id}")
 async def update_emp(emp_id: int, emp: Emp, db: Session = Depends(get_db)):
     emp_model = db.query(models.Emps) \
         .filter(models.Emps.id == emp_id).first()
@@ -76,7 +76,7 @@ async def update_emp(emp_id: int, emp: Emp, db: Session = Depends(get_db)):
     return successful_response(200)
 
 
-@router.delete("/emps/{emp_id}")
+@router.delete("/{emp_id}")
 async def delete_emp(emp_id: int, db: Session = Depends(get_db)):
     emp_model = db.query(models.Emps) \
         .filter(models.Emps.id == emp_id).first()

@@ -20,12 +20,12 @@ router = APIRouter(
     responses={401: {"deps": "Not authorized"}})
 
 
-@router.get("/depts")
+@router.get("/")
 async def depts_all(db: Session = Depends(get_db)):
     return db.query(models.Depts).all()
 
 
-@router.post("/depts")
+@router.post("/")
 async def create_dept(dept: Dept, db: Session = Depends(get_db)):
     dept_model = models.Depts()
     dept_model.dp_no = dept.dp_no
@@ -38,7 +38,7 @@ async def create_dept(dept: Dept, db: Session = Depends(get_db)):
     return successful_response(201)
 
 
-@router.put("/depts/{dept_id}")
+@router.put("/{dept_id}")
 async def update_dept(dept_id: int, dept: Dept, db: Session = Depends(get_db)):
     dept_model = db.query(models.Depts) \
         .filter(models.Depts.id == dept_id).first()
@@ -56,7 +56,7 @@ async def update_dept(dept_id: int, dept: Dept, db: Session = Depends(get_db)):
     return successful_response(200)
 
 
-@router.delete("/depts/{dept_id}")
+@router.delete("/{dept_id}")
 async def delete_dept(dept_id: int, db: Session = Depends(get_db)):
     dept_model = db.query(models.Depts) \
         .filter(models.Depts.id == dept_id).first()
@@ -72,7 +72,7 @@ async def delete_dept(dept_id: int, db: Session = Depends(get_db)):
     return successful_response(200)
 
 
-@router.get("/depts/{dept_id}")
+@router.get("/{dept_id}")
 async def dept_row(dept_id: int, db: Session = Depends(get_db)):
     dept_model = db.query(models.Depts) \
         .filter(models.Depts.id == dept_id).first()
