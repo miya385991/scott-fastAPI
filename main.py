@@ -22,6 +22,3 @@ models.Base.metadata.create_all(bind=engine)
 app.include_router(depts.router)
 app.include_router(emps.router)
 
-if __name__ == "__main__":
-    uvicorn.run("profile-app-backend-api.main:app",
-                port=8000, host='127.0.0.1', reload=True)
