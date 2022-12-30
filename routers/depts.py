@@ -15,7 +15,7 @@ class Dept(BaseModel):
 
 
 router = APIRouter(
-    prefix="/deps",
+    prefix="/depts",
     tags=["depts"],
     responses={401: {"deps": "Not authorized"}})
 
